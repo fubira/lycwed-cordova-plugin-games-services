@@ -3,7 +3,7 @@
 * found in the LICENSE file.
 */
 
-package com.intel;
+package com.lycwed;
 
 import java.util.LinkedList;
 
@@ -17,21 +17,19 @@ public class GooglePlayGamesService extends BaseGameActivity {
     @Override
     public void onSignInFailed() {
         // Sign-in failed
-        Intent i = new Intent("com.intel.googleplayservices.loginerrror");
+        Intent i = new Intent("com.lycwed.googleplayservices.loginerrror");
         setResult(1,i);
         finish();
     }
 
     @Override
     public void onSignInSucceeded() {
-
-        Intent i = new Intent("com.intel.googleplayservices.loginsuccess");
+        Intent i = new Intent("com.lycwed.googleplayservices.loginsuccess");
         setResult(-1,i);
         finish();
     }
 
-    public void onCreate(Bundle b)
-    {
+    public void onCreate(Bundle b) {
         super.onCreate(b);
     }
 

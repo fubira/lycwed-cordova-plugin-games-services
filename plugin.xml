@@ -1,51 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="lycwed-cordova-plugin-games-services" version="1.0.3">
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="lycwed-cordova-plugin-games-services" version="1.0.5">
 
     <name>iOS &amp; Android Games Services</name>
     <description>Apple Game center and Google Play Games Plugin</description>
     <author>Lycwed</author>
-    <keywords>GamesServices</keywords>
+    <keywords>cordova, plugin, games services, game center, google play game</keywords>
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines>
     <license>MIT</license>
     <preference name="APP_ID" />
-    <js-module src="www/WebGamesServices.js" name="GamesPlugin">
+    <!-- <js-module src="www/WebGamesServices.js" name="GamesPlugin">
         <clobbers target="window.gamesServices" />
-    </js-module>
+    </js-module> -->
 
     <!-- android -->
     <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="GooglePlayGamesPlugin">
+                <param name="android-package" value="com.lycwed.GooglePlayGamesPlugin"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/google_play_services_app_id" />
+            <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
+            <activity android:name="com.lycwed.GooglePlayGamesService"></activity>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+        </config-file>
+
         <js-module src="www/AndroidGamesServices.js" name="GooglePlayGamesPlugin">
             <merges target="window.gamesServices" />
         </js-module>
 
         <!-- cordova CLI using gradle and it working well -->
         <framework src="com.google.android.gms:play-services-games:+" />
-        <framework src="com.google.android.gms:play-services-plus:+" />
-
-        <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="GooglePlayGamesPlugin">
-                <param name="android-package" value="com.intel.GooglePlayGamesPlugin"/>
-            </feature>
-        </config-file>
 
         <config-file target="res/values/strings.xml" parent="/*">
             <string name="google_play_services_app_id">$APP_ID</string>
         </config-file>
 
         <source-file src="src/android/gamehelper_strings.xml" target-dir="res/values" />
-
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
-            <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
-            <activity android:name="com.intel.GooglePlayGamesService"></activity>
-            <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/google_play_services_app_id" />
-        </config-file>
-
-
-        <source-file src="src/android/GooglePlayGamesService.java" target-dir="src/com/intel"/>
-        <source-file src="src/android/GooglePlayGamesPlugin.java" target-dir="src/com/intel"/>
+        <source-file src="src/android/GooglePlayGamesService.java" target-dir="src/com/lycwed"/>
+        <source-file src="src/android/GooglePlayGamesPlugin.java" target-dir="src/com/lycwed"/>
         <source-file src="src/android/com/google/example/games/basegameutils/BaseGameActivity.java" target-dir="src/com/google/example/games/basegameutils"/>
         <source-file src="src/android/com/google/example/games/basegameutils/GameHelper.java" target-dir="src/com/google/example/games/basegameutils"/>
         <source-file src="src/android/com/google/example/games/basegameutils/GameHelperUtils.java" target-dir="src/com/google/example/games/basegameutils"/>

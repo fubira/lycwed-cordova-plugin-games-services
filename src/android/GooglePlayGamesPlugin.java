@@ -3,9 +3,9 @@
 * found in the LICENSE file.
 */
 
-package com.intel;
+package com.lycwed;
 
-import com.intel.GooglePlayGamesService;
+import com.lycwed.GooglePlayGamesService;
 
 import android.app.Activity;
 import android.content.Context;
@@ -47,9 +47,9 @@ public class GooglePlayGamesPlugin extends CordovaPlugin {
     /**
      * strings for actions from the plugin
      */
-    public static final String PLAY_SERVICES_MESSAGE="com.intel.googleplayservices.action";
-    public static final String PLAY_SERVICES_LOGIN="com.intel.googleplayservices.login";
-    public static final String PLAY_SERVICES_LOGOUT="com.intel.googleplayservices.logout";
+    public static final String PLAY_SERVICES_MESSAGE="com.lycwed.googleplayservices.action";
+    public static final String PLAY_SERVICES_LOGIN="com.lycwed.googleplayservices.login";
+    public static final String PLAY_SERVICES_LOGOUT="com.lycwed.googleplayservices.logout";
     private static int REQUEST_ACHIEVEMENTS=1001;
     private static int REQUEST_LEADERBOARD=1002;
 

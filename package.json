@@ -1,6 +1,6 @@
 {
   "name": "lycwed-cordova-plugin-games-services",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Allows to use Google Play Games and Apple Game Center services.",
   "cordova": {
     "id": "lycwed-cordova-plugin-games-services",
@@ -8,9 +8,6 @@
       "ios",
       "android"
     ]
-  },
-  "dependencies": {
-    "cordova-plugin-googleplayservices": "*"
   },
   "repository": {
     "type": "git",
