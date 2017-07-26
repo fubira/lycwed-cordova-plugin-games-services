@@ -4,27 +4,27 @@
 *
 */
 
-var exec = require("cordova/exec");
+var cordova = require('cordova');
 
-var GamesServices = {
+var gamesServices = {
     authenticate: function(sucessCallback, errorCallback) {
         // Connect before authenticate
-        cordova.exec(function(sucessCallback) {
-            cordova.exec(sucessCallback, errorCallback, "GamesServices", "authenticate", []);
-        }, errorCallback, "GamesServices", "connect", []);
+        cordova.exec(function() {
+            cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "authenticate", []);
+        }, errorCallback, "GooglePlayGamesPlugin", "connect", []);
     },
     showAchievements: function(sucessCallback, errorCallback) {
-        cordova.exec(sucessCallback, errorCallback, "GamesServices", "achievements", []);
+        cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "achievements", []);
     },
     addAchievement: function(achievement_id, sucessCallback, errorCallback) {
-        cordova.exec(sucessCallback, errorCallback, "GamesServices", "addAchievement", [achievement_id]);
+        cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "addAchievement", [achievement_id]);
     },
     showLeaderboard: function(leaderboard_id, sucessCallback, errorCallback) {
-        cordova.exec(sucessCallback, errorCallback, "GamesServices", "showLeaderboard", [leaderboard_id]);
+        cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "showLeaderboard", [leaderboard_id]);
     },
     updateLeaderboardScore: function(leaderboard_id, score, sucessCallback, errorCallback) {
-        cordova.exec(sucessCallback, errorCallback, "GamesServices", "updateLeaderboardScore", [leaderboard_id, score]);
+        cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "updateLeaderboardScore", [leaderboard_id, score]);
     }
 }
 
-module.exports = GamesServices;
+module.exports = gamesServices;

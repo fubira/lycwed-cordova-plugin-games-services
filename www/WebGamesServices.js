@@ -3,7 +3,6 @@
 * found in the LICENSE file.
 */
 
-var exec = require('cordova/exec');
 var savedGames = { default: null };
 
 if (window.localStorage.getItem('GooglePlaySavedGames')) {
@@ -19,7 +18,7 @@ function writeSavedGameData() {
     window.localStorage.setItem('GooglePlaySavedGames', JSON.stringify(savedGames));
 }
 
-var GooglePlayGamesPluginCore = {
+var gamesServices = {
     saveGame: function(id,data) {
         if (!id && !data) {
             return;
@@ -48,4 +47,4 @@ var GooglePlayGamesPluginCore = {
     }
 };
 
-module.exports = GooglePlayGamesPluginCore;
+module.exports = gamesServices;

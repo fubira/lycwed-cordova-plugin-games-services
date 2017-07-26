@@ -21,7 +21,7 @@ Fill out the information and type and hit "Save".  On the next page, you will se
 ##Installing plugin
 
 ```
-cordova plugin add lycwed-cordova-plugin-games-services --variable GPSAPPID=“_APPID_”
+cordova plugin add lycwed-cordova-plugin-games-services --variable APP_ID=“YOUR_APP_ID”
 ```
 
 This will install the plugin, and dependencies in your app.  The GPSAPPID is the Application ID you get from Google Play Dashboard when authorizing your application.

@@ -3,8 +3,7 @@
 * found in the LICENSE file.
 */
 
-package com.intel;
-
+package com.cordova.plugin;
 
 import java.util.LinkedList;
 
@@ -18,25 +17,23 @@ public class GooglePlayGamesService extends BaseGameActivity {
     @Override
     public void onSignInFailed() {
         // Sign-in failed
-    	Intent i = new Intent("com.intel.googleplaygamesservice.loginerrror");
-    	setResult(1,i);
-    	finish();
+        Intent i = new Intent("com.cordova.plugin.googleplayservices.loginerrror");
+        setResult(1,i);
+        finish();
     }
 
     @Override
     public void onSignInSucceeded() {
 
-		Intent i = new Intent("com.intel.googleplaygamesservice.loginsuccess");
-		setResult(-1,i);
-		finish();
+        Intent i = new Intent("com.cordova.plugin.googleplayservices.loginsuccess");
+        setResult(-1,i);
+        finish();
     }
 
     public void onCreate(Bundle b)
     {
-    	super.onCreate(b);
+        super.onCreate(b);
     }
-
-
 
     public void beginUserInitiatedSignIn() {
         super.beginUserInitiatedSignIn();

@@ -3,9 +3,9 @@
 * found in the LICENSE file.
 */
 
-package com.intel;
+package com.cordova.plugin;
 
-import com.intel.GooglePlayGamesService;
+import com.cordova.plugin.GooglePlayGamesService;
 
 import android.app.Activity;
 import android.content.Context;
@@ -41,16 +41,15 @@ public class GooglePlayGamesPlugin extends CordovaPlugin {
     private GooglePlayGamesService playGamesService;
     private static final int SIGNIN_ACTIVITY=1;
 
-
-	private CallbackContext cb;
+    private CallbackContext cb;
 
 
     /**
      * strings for actions from the plugin
      */
-    public static final String PLAY_SERVICES_MESSAGE="com.intel.googleplayservices.action";
-    public static final String PLAY_SERVICES_LOGIN="com.intel.googleplayservices.login";
-    public static final String PLAY_SERVICES_LOGOUT="com.intel.googleplayservices.logout";
+    public static final String PLAY_SERVICES_MESSAGE="com.cordova.plugin.googleplayservices.action";
+    public static final String PLAY_SERVICES_LOGIN="com.cordova.plugin.googleplayservices.login";
+    public static final String PLAY_SERVICES_LOGOUT="com.cordova.plugin.googleplayservices.logout";
     private static int REQUEST_ACHIEVEMENTS=1001;
     private static int REQUEST_LEADERBOARD=1002;
 
@@ -68,14 +67,14 @@ public class GooglePlayGamesPlugin extends CordovaPlugin {
     }
 
     protected GoogleApiClient getApiClient(){
-    	if(!isSignedIn()){
-    		 mGoogleApiClient = new GoogleApiClient.Builder(mainActivity)
-    		 .addApi(Games.API, mGamesApiOptions)
+        if(!isSignedIn()){
+             mGoogleApiClient = new GoogleApiClient.Builder(mainActivity)
+             .addApi(Games.API, mGamesApiOptions)
              .addScope(Games.SCOPE_GAMES)
              .build();
-    		 mGoogleApiClient.connect();
-    	}
-    	return mGoogleApiClient;
+             mGoogleApiClient.connect();
+        }
+        return mGoogleApiClient;
 
     }
 
@@ -104,11 +103,11 @@ public class GooglePlayGamesPlugin extends CordovaPlugin {
         cb=callbackContext;
 
         if(action.equals("authenticate")){
-        	if(isSignedIn()){
-        		cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
-        		return true;
-        	}
-        	getApiClient();//Make the connection here
+            if(isSignedIn()){
+                cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
+                return true;
+            }
+            getApiClient();//Make the connection here
             intentAction=PLAY_SERVICES_LOGIN;
             Context context=this.cordova.getActivity().getApplicationContext();        //
             Intent intent=new Intent(context,GooglePlayGamesService.class);
@@ -118,103 +117,103 @@ public class GooglePlayGamesPlugin extends CordovaPlugin {
         }
         else if(action.equals("logout"))
         {
-        	if(mGoogleApiClient!=null||mGoogleApiClient.isConnected()){
-        		getApiClient().disconnect();
-        	}
+            if(mGoogleApiClient!=null||mGoogleApiClient.isConnected()){
+                getApiClient().disconnect();
+            }
 
-        	cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
-    		return true;
+            cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
+            return true;
         }
         else if(action.equals("achievements")){
-        	if(!isSignedIn()){
-        		cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
-        		return true;
-        	}
-        	cordova.startActivityForResult(this,Games.Achievements.getAchievementsIntent(getApiClient()), REQUEST_ACHIEVEMENTS);
-        	return true;
+            if(!isSignedIn()){
+                cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
+                return true;
+            }
+            cordova.startActivityForResult(this,Games.Achievements.getAchievementsIntent(getApiClient()), REQUEST_ACHIEVEMENTS);
+            return true;
         }
         else if(action.equals("addAchievement")){
-        	if(!isSignedIn()){
-        		cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
-        		return true;
-        	}
-        	if(args.length()==0) return false;
-    		String achievementId="";
-    		try {
-    			achievementId=args.get(0).toString();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				return false;
-			}
-    		Games.Achievements.unlock(getApiClient(), achievementId);
-    		cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
-    		return true;
+            if(!isSignedIn()){
+                cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
+                return true;
+            }
+            if(args.length()==0) return false;
+            String achievementId="";
+            try {
+                achievementId=args.get(0).toString();
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                return false;
+            }
+            Games.Achievements.unlock(getApiClient(), achievementId);
+            cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
+            return true;
         }
-		else if(action.equals("incrementAchievement")){
-        	if(!isSignedIn()){
-        		cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
-        		return true;
-        	}
-        	if(args.length()==0) return false;
-    		String achievementId="";
-			int value=0;
-    		try {
-    			achievementId=args.get(0).toString();
-				value=Integer.parseInt(args.get(1).toString());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				return false;
-			}
-    		Games.Achievements.increment(getApiClient(), achievementId, value);
-    		cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
-    		return true;
+        else if(action.equals("incrementAchievement")){
+            if(!isSignedIn()){
+                cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
+                return true;
+            }
+            if(args.length()==0) return false;
+            String achievementId="";
+            int value=0;
+            try {
+                achievementId=args.get(0).toString();
+                value=Integer.parseInt(args.get(1).toString());
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                return false;
+            }
+            Games.Achievements.increment(getApiClient(), achievementId, value);
+            cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
+            return true;
         }
         else if(action.equals("showLeaderboard"))
         {
-        	if(!isSignedIn()){
-        		cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
-        		return true;
-        	}
-        	if(args.length()==0) return false;
-    		String leaderboardId="";
-    		try {
-    			leaderboardId=args.get(0).toString();
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				return false;
-			}
-    		cordova.startActivityForResult(this,Games.Leaderboards.getLeaderboardIntent(getApiClient(), leaderboardId), REQUEST_LEADERBOARD);
+            if(!isSignedIn()){
+                cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
+                return true;
+            }
+            if(args.length()==0) return false;
+            String leaderboardId="";
+            try {
+                leaderboardId=args.get(0).toString();
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                return false;
+            }
+            cordova.startActivityForResult(this,Games.Leaderboards.getLeaderboardIntent(getApiClient(), leaderboardId), REQUEST_LEADERBOARD);
         }
         else if(action.equals("updateLeaderboardScore")){
-        	if(!isSignedIn()){
-        		cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
-        		return true;
-        	}
-        	if(args.length()==0) return false;
-    		String leaderboardId="";
-    		Long score;
-    		try {
-    			leaderboardId=args.get(0).toString();
-    			score=Long.parseLong(args.get(1).toString());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				return false;
-			}
-    		Games.Leaderboards.submitScore(getApiClient(), leaderboardId, score);
+            if(!isSignedIn()){
+                cb.sendPluginResult(new PluginResult(PluginResult.Status.ERROR,"1"));
+                return true;
+            }
+            if(args.length()==0) return false;
+            String leaderboardId="";
+            Long score;
+            try {
+                leaderboardId=args.get(0).toString();
+                score=Long.parseLong(args.get(1).toString());
+            } catch (JSONException e) {
+                // TODO Auto-generated catch block
+                return false;
+            }
+            Games.Leaderboards.submitScore(getApiClient(), leaderboardId, score);
              cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
              return true;
         }
         else if(action.equals("connect"))
         {
-        	cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
-        	return true;
+            cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,"-1"));
+            return true;
         }
 
         return true;
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-    	cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,Integer.toString(resultCode)));
+        cb.sendPluginResult(new PluginResult(PluginResult.Status.OK,Integer.toString(resultCode)));
     }
 }
 

@@ -10,7 +10,7 @@
     ]
   },
   "dependencies": {
-    "cordova-plugin-gamecenter": "*"
+    "cordova-plugin-googleplayservices": "*"
   },
   "repository": {
     "type": "git",

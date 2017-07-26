@@ -4,9 +4,9 @@
 * This makes calls to the https://github.com/Wizcorp/phonegap-plugin-gameCenter plugin
 */
 
-var exec = require("cordova/exec");
+var cordova = require('cordova');
 
-var GamesServices = {
+var gamesServices = {
     authenticate: function(successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "GameCenterPlugin", "authenticateLocalPlayer", []);
     },
@@ -23,4 +23,4 @@ var GamesServices = {
         cordova.exec(successCallback, errorCallback, "GameCenterPlugin", "reportScore", [category, score]);
     },
 }
-module.exports = GamesServices;
+module.exports = gamesServices;
