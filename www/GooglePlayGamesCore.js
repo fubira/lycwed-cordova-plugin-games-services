@@ -3,43 +3,47 @@
 * found in the LICENSE file.
 */
 
-var exec = require("cordova/exec");
+var exec = require('cordova/exec');
+var savedGames = { default: null };
 
-var savedGames = {
-    default:null,
-};
-
-if( window.localStorage.getItem("GooglePlaySavedGames")){
-    try{
-        savedGames=JSON.parse( window.localStorage.getItem("GooglePlaySavedGames"));
+if (window.localStorage.getItem('GooglePlaySavedGames')) {
+    try {
+        savedGames = JSON.parse(window.localStorage.getItem('GooglePlaySavedGames'));
     }
-    catch(e){}
+    catch(e) {
+        console.log('GooglePlaySavedGames failed', e);
+    }
 }
 
-function writeSavedGameData(){
-    window.localStorage.setItem("GooglePlaySavedGames",JSON.stringify(savedGames));
+function writeSavedGameData() {
+    window.localStorage.setItem('GooglePlaySavedGames', JSON.stringify(savedGames));
 }
+
 var GooglePlayGamesPluginCore = {
-    saveGame:function(id,data){
-        if(!id&&!data) return;
-        if(!data){
-            data=id;
-            id="default";
+    saveGame: function(id,data) {
+        if (!id && !data) {
+            return;
         }
-        savedGames[id]=data;
+        if (!data) {
+            data = id;
+            id = 'default';
+        }
+        savedGames[id] = data;
         writeSavedGameData();
     },
-    loadSavedGame:function(id){
-        if(savedGames[id])
+    loadSavedGame: function(id) {
+        if (savedGames[id]) {
             return savedGames[id];
+        }
         return null;
     },
-    getAllSavedGames:function(){
+    getAllSavedGames: function() {
         return savedGames;
     },
-    deleteSavedGame:function(id){
-        if(savedGames[id])
+    deleteSavedGame: function(id) {
+        if (savedGames[id]) {
             delete savedGames[id];
+        }
         writeSavedGameData();
     }
 };

@@ -21,69 +21,36 @@ Fill out the information and type and hit "Save".  On the next page, you will se
 ##Installing plugin
 
 ```
-cordova plugin add com.intel.googleplaygameservices --variable GPSAPPID=“_APPID_”
+cordova plugin add lycwed-cordova-plugin-games-services --variable GPSAPPID=“_APPID_”
 ```
 
 This will install the plugin, and dependencies in your app.  The GPSAPPID is the Application ID you get from Google Play Dashboard when authorizing your application.
 
-
-To install in the Intel® XDK add the following to your intelxdk.config.additions.xml
-
-```
-<intelxdk:plugin intelxdk:name="googleplaygameservices" intelxdk:value="http://...">
-    <intelxdk:param intelxdk:name="GPSAPPID" intelxdk:value="_APPID_" />
-</intelxdk:plugin>
-
-```
-
 ###API
-The JavaScript API is below.  Everything is called on the GooglePlayGamesPlugin object
+The JavaScript API is below. Everything is called in window.GamesServices object.
 
 ```
-connect()                      call on device ready . This connects the native api
-
-authenticate(success,failure)   Authenticate the user against a google play
+authenticate(success, failure)   Authenticate the user against a google play
                                 account.  Will call success or failure functions.
                                 If fail, a message will be passed from the google play
 
-logout(success,failure) 		 Sign the user out of Google Play Games Services
-								 for your app
+                                for your app
 
-addAchievement(achievement_id,success,failure)  unlock the achievement for the user
+showAchievements(success, failure)  Show the achievements for the user.
+                                If there is an error (not logged in),
+                                the message will be passed in.  This is a
+                                new activity that gets launched
 
-showAchievements(success,failure)  Show the achievements for the user.
-									If there is an error (not logged in),
-									the message will be passed in.  This is a
-									new activity that gets launched
+addAchievement(achievement_id, success, failure)  unlock the achievement for
+                                the user
 
-updateLeaderboardScore(leaderboard_id,score,success,failure)
-									Update the score for the selected
-									leaderboard for the user
+showLeaderboardScore(leaderboard_id, success, failure)  Show the leaderboard.
+                                If there is an error (not logged in),
+                                the message will be passed in the error. This is a new activity that gets launched
 
-showLeaderboardScore(leaderboard_id,success,failure)
-                                    Show the leaderboard.
-                                    If there is an error (not logged in),
-                                    the message will be passed in the error.  This is a
-                                    new activity that gets launched
-
-
-saveGame(id,data)
-                            Save a game to local storage.  Id is the key and data is JSON data
-                            If no id is specficied, we use only one save game slot named "default"
-                            If an entry exists, we overwrite the data
-
-loadSavedGame(id)
-                            Load a saved games data.
-                            If no id is specified, we load the "default" saved game state.
-
-deleteSavedGame(id)
-                            Delete a saved game from local storage.
-                            If no id is specified, we delete the "default" saved game state.
-
-getAllSavedGames()
-                            Returns an object with all the saved games.
-                            The key is the id used to save.
-
+updateLeaderboardScore(leaderboard_id, score, success, failure) Update the
+                                score for the selected
+                                leaderboard for the user
 
 ```
 

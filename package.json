@@ -1,32 +1,39 @@
 {
-    "version": "1.0.8",
-    "name": "com.intel.googleplaygamesplugin",
-    "cordova_name": "googleplaygamesplugin",
-    "description": "googleplaygamesplugin",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/01org/cordova-google-play-games-services.git"
-    },
-    "bugs": "https://github.com/01org/cordova-google-play-games-services/issues",
-    "author": {
-        "name": "Ian Maffett - Intel",
-        "url": "https://software.intel.com/en-us/html5/tools"
-    },
-    "keywords": [
-        "Google Play Games",
-        "Games",
-        "Leader boards",
-        "Leaderboards"
-    ],
+  "name": "lycwed-cordova-plugin-games-services",
+  "version": "1.0.0",
+  "description": "Allows to use Google Play Games and Apple Game Center services.",
+  "cordova": {
+    "id": "lycwed-cordova-plugin-games-services",
     "platforms": [
-        "android",
-        "ios"
-    ],
-    "engines": [
-        {
-            "name": "cordova",
-            "version": ">=3.0.0"
-        }
+      "ios",
+      "android"
     ]
+  },
+  "dependencies": {
+    "cordova-plugin-gamecenter": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lycwed/lycwed-cordova-plugin-games-services.git"
+  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "lycwed",
+  "license": "MIT",
+  "bugs": "https://github.com/lycwed/lycwed-cordova-plugin-games-services/issues",
+  "keywords": [
+      "Google Play Games",
+      "Games",
+      "Leader boards",
+      "Leaderboards"
+  ],
+  "platforms": [
+      "android",
+      "ios"
+  ],
+  "homepage": "https://github.com/lycwed/lycwed-cordova-plugin-games-services#readme"
 }
