@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="lycwed-cordova-plugin-games-services" version="1.0.2">
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="lycwed-cordova-plugin-games-services" version="1.0.3">
 
     <name>GamesServices</name>
     <description>Google Play Games Plugin</description>
@@ -26,7 +26,7 @@
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="GooglePlayGamesPlugin">
-                <param name="android-package" value="com.cordova.plugin.GooglePlayGamesPlugin"/>
+                <param name="android-package" value="com.intel.GooglePlayGamesPlugin"/>
             </feature>
         </config-file>
 
@@ -39,13 +39,13 @@
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
             <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
-            <activity android:name="com.cordova.plugin.GooglePlayGamesService"></activity>
+            <activity android:name="com.intel.GooglePlayGamesService"></activity>
             <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/google_play_services_app_id" />
         </config-file>
 
 
-        <source-file src="src/android/GooglePlayGamesService.java" target-dir="src/com/cordova/plugin"/>
-        <source-file src="src/android/GooglePlayGamesPlugin.java" target-dir="src/com/cordova/plugin"/>
+        <source-file src="src/android/GooglePlayGamesService.java" target-dir="src/com/intel"/>
+        <source-file src="src/android/GooglePlayGamesPlugin.java" target-dir="src/com/intel"/>
         <source-file src="src/android/com/google/example/games/basegameutils/BaseGameActivity.java" target-dir="src/com/google/example/games/basegameutils"/>
         <source-file src="src/android/com/google/example/games/basegameutils/GameHelper.java" target-dir="src/com/google/example/games/basegameutils"/>
         <source-file src="src/android/com/google/example/games/basegameutils/GameHelperUtils.java" target-dir="src/com/google/example/games/basegameutils"/>
