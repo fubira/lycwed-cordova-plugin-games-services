@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="lycwed-cordova-plugin-games-services" version="1.0.3">
 
-    <name>GamesServices</name>
-    <description>Google Play Games Plugin</description>
-    <author>Ian Maffett</author>
+    <name>iOS &amp; Android Games Services</name>
+    <description>Apple Game center and Google Play Games Plugin</description>
+    <author>Lycwed</author>
     <keywords>GamesServices</keywords>
     <engines>
         <engine name="cordova" version=">=3.0.0" />
@@ -20,9 +20,9 @@
             <merges target="window.gamesServices" />
         </js-module>
 
-        <framework src="com.android.support:support-v4:+" />
-        <framework src="com.google.android.gms:play-services-games:8.3.0" />
-        <framework src="com.google.android.gms:play-services-plus:8.3.0" />
+        <!-- cordova CLI using gradle and it working well -->
+        <framework src="com.google.android.gms:play-services-games:+" />
+        <framework src="com.google.android.gms:play-services-plus:+" />
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="GooglePlayGamesPlugin">
