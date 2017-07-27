@@ -25,7 +25,7 @@ var actions = {
     'unlockAchievement': '',
     'incrementAchievement': '',
     'showAchievements': 'getAchievements',
-    'showPlayer': 'getPlayerImage'
+    'showPlayer': 'auth'
 };
 
 for (var action in actions) {
@@ -46,7 +46,7 @@ for (var action in actions) {
                 failure = failure || defaultFailureCallback;
                 data = data || {};
 
-                exec(success, failure, GAME_SERVICE, method, data);
+                exec(success, failure, GAME_SERVICE, method, [data]);
             }
         }
     }
