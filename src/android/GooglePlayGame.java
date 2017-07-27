@@ -1,3 +1,22 @@
+/*
+       Licensed to the Apache Software Foundation (ASF) under one
+       or more contributor license agreements.  See the NOTICE file
+       distributed with this work for additional information
+       regarding copyright ownership.  The ASF licenses this file
+       to you under the Apache License, Version 2.0 (the
+       "License"); you may not use this file except in compliance
+       with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing,
+       software distributed under the License is distributed on an
+       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+       KIND, either express or implied.  See the License for the
+       specific language governing permissions and limitations
+       under the License.
+ */
+
 package com.lycwed;
 
 import org.apache.cordova.CallbackContext;
@@ -21,7 +40,7 @@ import com.google.android.gms.games.Player;
 
 public class GooglePlayGame extends CordovaPlugin implements GameHelperListener {
 
-    private static final String LOGTAG = "lycwed-CordovaGooglePlayGame";
+    private static final String LOGTAG = "lycwed-GooglePlayGame";
 
     private static final String ACTION_AUTH = "auth";
     private static final String ACTION_SIGN_OUT = "signOut";
@@ -180,7 +199,7 @@ public class GooglePlayGame extends CordovaPlugin implements GameHelperListener 
     private void executeShowAllLeaderboards(final CallbackContext callbackContext) {
         Log.d(LOGTAG, "executeShowAllLeaderboards");
 
-        final GooglePlayGame plugin = this;
+        final PlayGamesServices plugin = this;
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -201,7 +220,7 @@ public class GooglePlayGame extends CordovaPlugin implements GameHelperListener 
     private void executeShowLeaderboard(final JSONObject options, final CallbackContext callbackContext) {
         Log.d(LOGTAG, "executeShowLeaderboard");
 
-        final GooglePlayGame plugin = this;
+        final PlayGamesServices plugin = this;
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -261,7 +280,7 @@ public class GooglePlayGame extends CordovaPlugin implements GameHelperListener 
     private void executeShowAchievements(final CallbackContext callbackContext) {
         Log.d(LOGTAG, "executeShowAchievements");
 
-        final GooglePlayGame plugin = this;
+        final PlayGamesServices plugin = this;
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override

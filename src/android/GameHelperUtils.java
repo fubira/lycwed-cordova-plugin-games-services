@@ -1,18 +1,22 @@
 package com.lycwed;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.content.res.Resources;
 import android.util.Log;
+import android.R;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.games.GamesActivityResultCodes;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+/**
+ * Created by btco on 2/10/14.
+ */
 class GameHelperUtils {
     public static final int R_UNKNOWN_ERROR = 0;
     public static final int R_SIGN_IN_FAILED = 1;
@@ -24,6 +28,13 @@ class GameHelperUtils {
             "*Failed to sign in. Please check your network connection and try again.",
             "*The application is incorrectly configured. Check that the package name and signing certificate match the client ID created in Developer Console. Also, if the application is not yet published, check that the account you are trying to sign in with is listed as a tester account. See logs for more information.",
             "*License check failed."
+    };
+
+    private final static String[] RES_TEXTS = {
+            "Unknown error.",
+            "Failed to sign in. Please check your network connection and try again.",
+            "The application is incorrectly configured. Check that the package name and signing certificate match the client ID created in Developer Console. Also, if the application is not yet published, check that the account you are trying to sign in with is listed as a tester account. See logs for more information.",
+            "License check failed."
     };
 
     static String activityResponseCodeToString(int respCode) {
@@ -158,6 +169,17 @@ class GameHelperUtils {
     }
 
     static String getString(Context ctx, int whichString) {
-        return FALLBACK_STRINGS[whichString];
+        whichString = whichString >= 0 && whichString < RES_TEXTS.length ? whichString : 0;
+        String resText = RES_TEXTS[whichString];
+        try {
+            return resText;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.w(GameHelper.TAG, "*** GameHelper could not found resource id #" + whichString + ". " +
+                "This probably happened because you included it as a stand-alone JAR. " +
+                "BaseGameUtils should be compiled as a LIBRARY PROJECT, so that it can access " +
+                "its resources. Using a fallback string.");
+            return FALLBACK_STRINGS[whichString];
+        }
     }
 }
