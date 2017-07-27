@@ -28,32 +28,28 @@ var actions = {
     'showPlayer': 'getPlayerImage'
 };
 
-actions.forEach(function (method, action) {
-    if (method) {
-        gameServices.prototype[action] = function (data, success, failure) {
-            var defaultSuccessCallback = function () {
-                console.log(GAME_SERVICE + '.' + action + ': executed successfully');
-            };
+for (var action in actions) {
+    if (actions.hasOwnProperty(action)) {
+        var method = actions[action];
 
-            var defaultFailureCallback = function () {
-                console.warn(GAME_SERVICE + '.' + action + ': failed on execution');
-            };
+        if (method) {
+            gameServices.prototype[action] = function (success, failure, data) {
+                var defaultSuccessCallback = function () {
+                    console.log(GAME_SERVICE + '.' + action + ': executed successfully');
+                };
 
-            if (typeof data === 'function') {
-                // Assume providing successCallback as 1st arg and possibly failureCallback as 2nd arg
-                failure = success || defaultFailureCallback;
-                success = data;
-                data = [];
-            }
-            else {
-                data = [data] || [];
+                var defaultFailureCallback = function () {
+                    console.warn(GAME_SERVICE + '.' + action + ': failed on execution');
+                };
+
                 success = success || defaultSuccessCallback;
                 failure = failure || defaultFailureCallback;
-            }
+                data = data || {};
 
-            exec(success, failure, GAME_SERVICE, method, data);
+                exec(success, failure, GAME_SERVICE, method, data);
+            }
         }
     }
-});
+}
 
 module.exports = new gameServices();
