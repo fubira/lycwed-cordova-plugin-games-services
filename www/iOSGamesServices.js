@@ -1,26 +1,59 @@
-/* Copyright (c) 2014 Intel Corporation. All rights reserved.
-* Use of this source code is governed by a MIT-style license that can be
-* found in the LICENSE file.
-* This makes calls to the https://github.com/Wizcorp/phonegap-plugin-gameCenter plugin
-*/
+var exec = require("cordova/exec");
+var GAME_SERVICE = "gameServices";
 
-var cordova = require('cordova');
+var gameServices = function () {
+    this.name = GAME_SERVICE;
+};
 
-var gamesServices = {
-    authenticate: function(successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "GameCenterPlugin", "authenticateLocalPlayer", []);
-    },
-    showAchievements: function() {
-        cordova.exec(null, null, "GameCenterPlugin", "showAchievements", []);
-    },
-    addAchievement: function(category, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "GameCenterPlugin", "reportAchievementIdentifier", [category, 100]);
-    },
-    showLeaderboard: function(category) {
-        cordova.exec(null, null, "GameCenterPlugin", "showLeaderboard", [category]);
-    },
-    updateLeaderboardScore: function(category, score, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "GameCenterPlugin", "reportScore", [category, score]);
-    },
-}
-module.exports = gamesServices;
+// Existing iOS methods
+// auth
+// getPlayerImage
+// submitScore
+// showLeaderboard
+// reportAchievement
+// resetAchievements
+// getAchievements
+
+// Interface iOS methods with android methods
+var actions = {
+    'auth': 'auth',
+    'signOut': '',
+    'isSignedIn': '',
+    'submitScore': 'submitScore',
+    'showAllLeaderboards': 'reportAchievement',
+    'showLeaderboard': 'showLeaderboard',
+    'unlockAchievement': '',
+    'incrementAchievement': '',
+    'showAchievements': 'getAchievements',
+    'showPlayer': 'getPlayerImage'
+};
+
+actions.forEach(function (method, action) {
+    if (method) {
+        gameServices.prototype[action] = function (data, success, failure) {
+            var defaultSuccessCallback = function () {
+                console.log(GAME_SERVICE + '.' + action + ': executed successfully');
+            };
+
+            var defaultFailureCallback = function () {
+                console.warn(GAME_SERVICE + '.' + action + ': failed on execution');
+            };
+
+            if (typeof data === 'function') {
+                // Assume providing successCallback as 1st arg and possibly failureCallback as 2nd arg
+                failure = success || defaultFailureCallback;
+                success = data;
+                data = [];
+            }
+            else {
+                data = [data] || [];
+                success = success || defaultSuccessCallback;
+                failure = failure || defaultFailureCallback;
+            }
+
+            exec(success, failure, GAME_SERVICE, method, data);
+        }
+    }
+});
+
+module.exports = new gameServices();

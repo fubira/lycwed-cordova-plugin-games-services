@@ -1,30 +1,36 @@
-/* Copyright (c) 2014 Intel Corporation. All rights reserved.
-* Use of this source code is governed by a MIT-style license that can be
-* found in the LICENSE file.
-*
-*/
+var exec = require("cordova/exec");
+var GAME_SERVICE = "gameServices";
 
-var cordova = require('cordova');
+var gameServices = function () {
+    this.name = GAME_SERVICE;
+};
 
-var gamesServices = {
-    authenticate: function(sucessCallback, errorCallback) {
-        // Connect before authenticate
-        cordova.exec(function() {
-            cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "authenticate", []);
-        }, errorCallback, "GooglePlayGamesPlugin", "connect", []);
-    },
-    showAchievements: function(sucessCallback, errorCallback) {
-        cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "achievements", []);
-    },
-    addAchievement: function(achievement_id, sucessCallback, errorCallback) {
-        cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "addAchievement", [achievement_id]);
-    },
-    showLeaderboard: function(leaderboard_id, sucessCallback, errorCallback) {
-        cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "showLeaderboard", [leaderboard_id]);
-    },
-    updateLeaderboardScore: function(leaderboard_id, score, sucessCallback, errorCallback) {
-        cordova.exec(sucessCallback, errorCallback, "GooglePlayGamesPlugin", "updateLeaderboardScore", [leaderboard_id, score]);
+var actions = ['auth', 'signOut', 'isSignedIn', 'submitScore', 'showAllLeaderboards', 'showLeaderboard', 'unlockAchievement', 'incrementAchievement', 'showAchievements', 'showPlayer'];
+
+actions.forEach(function (action) {
+    gameServices.prototype[action] = function (data, success, failure) {
+        var defaultSuccessCallback = function () {
+            console.log(GAME_SERVICE + '.' + action + ': executed successfully');
+        };
+
+        var defaultFailureCallback = function () {
+            console.warn(GAME_SERVICE + '.' + action + ': failed on execution');
+        };
+
+        if (typeof data === 'function') {
+            // Assume providing successCallback as 1st arg and possibly failureCallback as 2nd arg
+            failure = success || defaultFailureCallback;
+            success = data;
+            data = {};
+        }
+        else {
+            data = data || {};
+            success = success || defaultSuccessCallback;
+            failure = failure || defaultFailureCallback;
+        }
+
+        exec(success, failure, GAME_SERVICE, action, [data]);
     }
-}
+});
 
-module.exports = gamesServices;
+module.exports = new gameServices();

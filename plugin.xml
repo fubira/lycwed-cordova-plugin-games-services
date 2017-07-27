@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="lycwed-cordova-plugin-games-services" version="1.0.6">
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="lycwed-cordova-plugin-games-services" version="1.0.7">
 
     <name>iOS &amp; Android Games Services</name>
     <description>Apple Game center and Google Play Games Plugin</description>
@@ -17,15 +17,15 @@
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="GooglePlayGamesPlugin">
-                <param name="android-package" value="com.lycwed.GooglePlayGamesPlugin"/>
+            <feature name="GooglePlayGame">
+                <param name="android-package" value="com.lycwed.GooglePlayGame"/>
             </feature>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <meta-data android:name="com.google.android.gms.games.APP_ID" android:value="@string/google_play_services_app_id" />
             <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
-            <activity android:name="com.lycwed.GooglePlayGamesService"></activity>
+            <activity android:name="com.lycwed.GooglePlayGameService"></activity>
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest">
@@ -33,29 +33,42 @@
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
         </config-file>
 
-        <js-module src="www/AndroidGamesServices.js" name="GooglePlayGamesPlugin">
+        <js-module src="www/AndroidGamesServices.js" name="GooglePlayGame">
             <merges target="window.gamesServices" />
         </js-module>
 
         <!-- cordova CLI using gradle and it working well -->
         <framework src="com.google.android.gms:play-services-games:+" />
         <framework src="com.google.android.gms:play-services-plus:+" />
+        <framework src="com.google.android.gms:play-services-drive:+" />
+        <framework src="com.google.android.gms:play-services-appstate:+" />
+        <framework src="com.google.android.gms:play-services-common:+" />
+
+        <source-file src="src/android/GooglePlayGame.java" target-dir="src/com/lycwed" />
+        <source-file src="src/android/GoogleGameService.java" target-dir="src/com/lycwed" />
+        <source-file src="src/android/BaseGameActivity.java" target-dir="src/com/lycwed" />
+        <source-file src="src/android/GameHelper.java" target-dir="src/com/lycwed" />
+        <source-file src="src/android/GameHelperUtils.java" target-dir="src/com/lycwed" />
 
         <config-file target="res/values/strings.xml" parent="/*">
             <string name="google_play_services_app_id">$APP_ID</string>
         </config-file>
-
-        <source-file src="src/android/gamehelper_strings.xml" target-dir="res/values" />
-        <source-file src="src/android/GooglePlayGamesService.java" target-dir="src/com/lycwed"/>
-        <source-file src="src/android/GooglePlayGamesPlugin.java" target-dir="src/com/lycwed"/>
-        <source-file src="src/android/com/google/example/games/basegameutils/BaseGameActivity.java" target-dir="src/com/google/example/games/basegameutils"/>
-        <source-file src="src/android/com/google/example/games/basegameutils/GameHelper.java" target-dir="src/com/google/example/games/basegameutils"/>
-        <source-file src="src/android/com/google/example/games/basegameutils/GameHelperUtils.java" target-dir="src/com/google/example/games/basegameutils"/>
     </platform>
 
+    <!-- ios -->
     <platform name="ios">
-        <dependency id="cordova-plugin-gamecenter" url="https://github.com/Wizcorp/cordova-plugin-gameCenter" />
-        <js-module src="www/iOSGamesServices.js" name="GameCenterPlugin">
+        <config-file target="config.xml" parent="/*">
+            <feature name="GooglePlayGame">
+                <param name="ios-package" value="GameCenter" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/GameCenter.h" />
+        <source-file src="src/ios/GameCenter.m" />
+
+        <framework src="GameKit.framework" />
+
+        <js-module src="www/iOSGamesServices.js" name="GameCenter">
             <merges target="window.gamesServices" />
         </js-module>
     </platform>
