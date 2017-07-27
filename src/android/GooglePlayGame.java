@@ -199,7 +199,7 @@ public class GooglePlayGame extends CordovaPlugin implements GameHelperListener 
     private void executeShowAllLeaderboards(final CallbackContext callbackContext) {
         Log.d(LOGTAG, "executeShowAllLeaderboards");
 
-        final PlayGamesServices plugin = this;
+        final GooglePlayGame plugin = this;
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -220,7 +220,7 @@ public class GooglePlayGame extends CordovaPlugin implements GameHelperListener 
     private void executeShowLeaderboard(final JSONObject options, final CallbackContext callbackContext) {
         Log.d(LOGTAG, "executeShowLeaderboard");
 
-        final PlayGamesServices plugin = this;
+        final GooglePlayGame plugin = this;
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -280,7 +280,7 @@ public class GooglePlayGame extends CordovaPlugin implements GameHelperListener 
     private void executeShowAchievements(final CallbackContext callbackContext) {
         Log.d(LOGTAG, "executeShowAchievements");
 
-        final PlayGamesServices plugin = this;
+        final GooglePlayGame plugin = this;
 
         cordova.getActivity().runOnUiThread(new Runnable() {
             @Override
