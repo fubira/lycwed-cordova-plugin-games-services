@@ -1,6 +1,5 @@
 package com.lycwed;
 
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 

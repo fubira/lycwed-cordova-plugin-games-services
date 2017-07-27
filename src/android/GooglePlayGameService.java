@@ -1,6 +1,6 @@
 package com.lycwed;
 
-public class GoogleGameService extends BaseGameActivity{
+public class GoogleGameService extends BaseGameActivity {
 
 	@Override
 	public void onSignInFailed() {

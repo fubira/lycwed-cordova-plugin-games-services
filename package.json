@@ -1,6 +1,6 @@
 {
   "name": "lycwed-cordova-plugin-games-services",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Allows to use Google Play Games and Apple Game Center services.",
   "cordova": {
     "id": "lycwed-cordova-plugin-games-services",
