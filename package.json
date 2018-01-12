@@ -9,6 +9,7 @@
       "android"
     ]
   },
+  "types": "./types/GamesServices.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lycwed/lycwed-cordova-plugin-games-services.git"
