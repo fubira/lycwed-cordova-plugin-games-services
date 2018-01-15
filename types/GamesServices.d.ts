@@ -4,6 +4,7 @@ declare class GamesServices {
     isSignedIn(success?: Function, failure?: Function, data?: Object): void;
     submitScore(success?: Function, failure?: Function, data?: Object): void;
     getPlayerScore(success?: Function, failure?: Function, data?: Object): void;
+    showLeaderboard(success?: Function, failure?: Function, data?: Object): void;
     showAllLeaderboards(success?: Function, failure?: Function, data?: Object): void;
     unlockAchievement(success?: Function, failure?: Function, data?: Object): void;
     incrementAchievement(success?: Function, failure?: Function, data?: Object): void;
