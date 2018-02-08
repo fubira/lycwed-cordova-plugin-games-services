@@ -28,7 +28,7 @@ var actions = {
     'showPlayer': 'auth'
 };
 
-for (var action in actions) {
+Object.keys(actions).forEach(function (action) {
     if (actions.hasOwnProperty(action)) {
         var method = actions[action];
 
@@ -50,6 +50,6 @@ for (var action in actions) {
             }
         }
     }
-}
+});
 
 module.exports = new gameServices();
